@@ -33,6 +33,7 @@ def silver_orders():
             "_ingested_at",
         )
         .dropDuplicates(["order_id"])
+        .dropna()
     )
 
 
