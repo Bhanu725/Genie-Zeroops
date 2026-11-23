@@ -1,0 +1,50 @@
+bundle:
+  name: zeroops-poc
+
+variables:
+  catalog:
+    description: Unity Catalog catalog that holds the POC schema
+    default: workspace
+  schema:
+    description: Schema for landing volume and medallion tables
+    default: zeroops_poc
+
+resources:
+  pipelines:
+    orders_pipeline:
+      name: zeroops_orders_pipeline
+      serverless: true
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      configuration:
+        landing_path: /Volumes/${var.catalog}/${var.schema}/landing/orders
+      libraries:
+        - file:
+            path: src/orders_pipeline.py
+
+  jobs:
+    zeroops_orders_job:
+      name: zeroops_orders_job
+      schedule:
+        quartz_cron_expression: "0 0 * * * ?"
+        timezone_id: Asia/Kolkata
+        pause_status: PAUSED
+      tasks:
+        - task_key: generate_orders
+          notebook_task:
+            notebook_path: src/generate_orders.py
+            base_parameters:
+              catalog: ${var.catalog}
+              schema: ${var.schema}
+        - task_key: run_pipeline
+          depends_on:
+            - task_key: generate_orders
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.orders_pipeline.id}
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-eccdbe40-f156.cloud.databricks.com

@@ -1,0 +1,13 @@
+diff --git a/src/generate_orders.py b/src/generate_orders.py
+index 5b0c28e..f817f3f 100644
+--- a/src/generate_orders.py
++++ b/src/generate_orders.py
+@@ -32,7 +32,7 @@ for _ in range(N_ORDERS):
+         "order_id": str(uuid.uuid4()),
+         "order_ts": ts.strftime("%Y-%m-%dT%H:%M:%SZ"),
+         "country": random.choice(COUNTRIES),
+-        "order_amount": round(random.uniform(5, 500), 2),
++        "total_amount": f"{random.uniform(5, 500):.2f} INR",
+         "promo_code": "DIWALI10" if random.random() < 0.25 else None,
+     })
+ 

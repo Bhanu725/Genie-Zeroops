@@ -1,0 +1,13 @@
+diff --git a/src/orders_pipeline.py b/src/orders_pipeline.py
+index 02ff8b2..d22c21d 100644
+--- a/src/orders_pipeline.py
++++ b/src/orders_pipeline.py
+@@ -24,7 +24,7 @@ def silver_orders():
+         .select(
+             "order_id",
+             F.to_timestamp("order_ts").alias("order_ts"),
+-            F.col("country"),
++            F.col("country").alias("customer_country"),
+             F.col("order_amount").cast("decimal(12,2)").alias("order_amount"),
+             "promo_code",
+             "_ingested_at",

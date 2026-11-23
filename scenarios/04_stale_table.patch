@@ -1,0 +1,13 @@
+diff --git a/src/generate_orders.py b/src/generate_orders.py
+index 5b0c28e..8456493 100644
+--- a/src/generate_orders.py
++++ b/src/generate_orders.py
+@@ -21,7 +21,7 @@ dbutils.fs.mkdirs(landing_path)
+ 
+ # COMMAND ----------
+ 
+-N_ORDERS = 500
++N_ORDERS = 0
+ COUNTRIES = ["IN", "US", "UK", "DE", "SG"]
+ 
+ now = datetime.now(timezone.utc)
