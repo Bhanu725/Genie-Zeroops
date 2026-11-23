@@ -20,6 +20,7 @@ if [ "${1:-}" = "--purge-landing" ]; then
   databricks fs rm -r "$LANDING" -p "$PROFILE" || true
   databricks fs mkdir "$LANDING" -p "$PROFILE"
   PID=$(databricks bundle summary -t "$TARGET" -p "$PROFILE" -o json | python -c "import sys,json;print(json.load(sys.stdin)['resources']['pipelines']['orders_pipeline']['id'])")
+  PID="${PID%$'\r'}"
   databricks pipelines start-update "$PID" --full-refresh-all -p "$PROFILE"
 fi
 echo "Baseline deployed from main."
