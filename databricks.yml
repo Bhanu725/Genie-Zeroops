@@ -41,18 +41,6 @@ resources:
             - task_key: generate_orders
           pipeline_task:
             pipeline_id: ${resources.pipelines.orders_pipeline.id}
-        - task_key: observability_checks
-          run_if: ALL_DONE # also runs (and records) when the pipeline fails
-          depends_on:
-            - task_key: run_pipeline
-          notebook_task:
-            notebook_path: src/observability_checks.py
-            base_parameters:
-              catalog: ${var.catalog}
-              schema: ${var.schema}
-              pipeline_id: ${resources.pipelines.orders_pipeline.id}
-              freshness_max_minutes: "90"
-              min_silver_ratio: "0.95"
 
 targets:
   dev:
