@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Shared settings. Override with env vars, e.g. PROFILE=other ./scripts/status.sh
-PROFILE="${PROFILE:-zeroops-poc2}"
+PROFILE="${PROFILE:-dev}"
 TARGET="${TARGET:-dev}"
 CATALOG="${CATALOG:-workspace}"
 SCHEMA="${SCHEMA:-zeroops_poc}"

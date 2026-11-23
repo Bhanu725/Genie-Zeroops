@@ -22,13 +22,13 @@ All data is synthetic.
 
 ## Setup
 ```bash
-databricks auth login --host https://dbc-eccdbe40-f156.cloud.databricks.com --profile zeroops-poc2
-databricks bundle validate -t dev -p zeroops-poc2
-databricks bundle deploy   -t dev -p zeroops-poc2     # only from committed + pushed code
-databricks bundle run zeroops_orders_job -t dev -p zeroops-poc2
+databricks auth login --host https://dbc-4747634d-f810.cloud.databricks.com --profile dev
+databricks bundle validate -t dev -p dev
+databricks bundle deploy   -t dev -p dev     # only from committed + pushed code
+databricks bundle run zeroops_orders_job -t dev -p dev
 ./scripts/status.sh
 ```
-Scripts use profile `zeroops-poc2` by default; override with `PROFILE=...`.
+Scripts use profile `dev` by default; override with `PROFILE=...`.
 Schema and volume are created idempotently by the generator notebook.
 
 ## Rules
