@@ -22,10 +22,10 @@ All data is synthetic.
 
 ## Setup
 ```bash
-databricks auth login --host https://dbc-4747634d-f810.cloud.databricks.com --profile dev
-databricks bundle validate -t dev -p dev
-databricks bundle deploy   -t dev -p dev     # only from committed + pushed code
-databricks bundle run zeroops_orders_job -t dev -p dev
+databricks auth login --host https://dbc-0836bb44-2e31.cloud.databricks.com --profile dev
+databricks bundle validate -t dev -p zeroops-poc3
+databricks bundle deploy   -t dev -p zeroops-poc3     # only from committed + pushed code
+databricks bundle run zeroops_orders_job -t dev -p zeroops-poc3
 ./scripts/status.sh
 ```
 Scripts use profile `dev` by default; override with `PROFILE=...`.
