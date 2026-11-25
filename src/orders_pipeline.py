@@ -24,7 +24,7 @@ def silver_orders():
         .select(
             "order_id",
             F.to_timestamp("order_ts").alias("order_ts"),
-            F.col("country"),
+            F.col("country").alias("customer_country"),
             F.col("order_amount").cast("decimal(12,2)").alias("order_amount"),
             "promo_code",
             "_ingested_at",
