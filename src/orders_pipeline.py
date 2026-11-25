@@ -24,7 +24,7 @@ def silver_orders():
         .select(
             "order_id",
             F.to_timestamp("order_ts").alias("order_ts"),
-            F.col("country"),
+            F.col("country").alias("customer_country"),
             F.col("order_amount").cast("decimal(12,2)").alias("order_amount"),
             "promo_code",
             "_ingested_at",
@@ -37,7 +37,7 @@ def silver_orders():
 def gold_daily_revenue():
     return (
         spark.read.table("silver_orders")
-        .groupBy(F.to_date("order_ts").alias("order_date"), F.col("country"))
+        .groupBy(F.to_date("order_ts").alias("order_date"), F.col("customer_country"))
         .agg(
             F.sum("order_amount").alias("revenue"),
             F.count("*").alias("order_count"),
